@@ -6,15 +6,35 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  color-scheme: dark;
+  --bg: #07121e;
+  --surface: rgba(9, 18, 30, 0.94);
+  --text: #f7fbff;
+  --muted: #a8bdcf;
+  --accent: #ffc55f;
+  --accent-strong: #69d4ff;
+  --border: rgba(255, 255, 255, 0.12);
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  color: white;
-  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 18%),
-    radial-gradient(circle at 85% 10%, rgba(255, 215, 0, 0.12), transparent 18%),
-    linear-gradient(180deg, #1b2f26 0%, #121d17 100%);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at 20% 10%, rgba(105, 212, 255, 0.15), transparent 15%),
+    radial-gradient(circle at 80% 15%, rgba(255, 197, 95, 0.12), transparent 18%),
+    linear-gradient(180deg, var(--bg) 0%, #02070f 100%);
+  color: var(--text);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 20%),
+    radial-gradient(circle at bottom right, rgba(255, 197, 95, 0.04), transparent 15%);
+  pointer-events: none;
 }
 
 main {
@@ -46,6 +66,118 @@ main {
 .page-shell > * {
   position: relative;
   z-index: 1;
+}
+
+.landing {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.landing-copy {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  max-width: 440px;
+  padding: 1.6rem 1.8rem;
+  border-radius: 28px;
+  background: rgba(6, 12, 24, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
+}
+
+.landing-copy p:first-child {
+  margin: 0 0 0.85rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.landing-copy h1 {
+  margin: 0 0 1.1rem;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  line-height: 1.05;
+}
+
+.landing-copy p:last-child {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+.hotspot {
+  position: absolute;
+  border-radius: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.hotspot:hover {
+  transform: scale(1.08);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 36px rgba(255, 197, 95, 0.65), 0 0 58px rgba(105, 212, 255, 0.3);
+}
+
+.hotspot::before {
+  content: attr(data-label);
+  position: absolute;
+  bottom: calc(100% + 0.75rem);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(6, 12, 24, 0.95);
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.hotspot:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.tin-can {
+  top: 35%;
+  left: 47.5%;
+  width: 110px;
+  height: 42px;
+}
+
+.knife {
+  top: 20%;
+  left: 24.5%;
+  width: 80px;
+  height: 60px;
+}
+
+.bottle {
+  top: 20%;
+  left: 67.5%;
+  width: 92px;
+  height: 62px;
+}
+
+.other-tin-cans {
+  top: 60%;
+  left: 60.5%;
+  width: 112px;
+  height: 82px;
 }
 
 h1 {
@@ -226,6 +358,69 @@ a.button-link:hover {
 .card-4 { transform: rotate(1.4deg); }
 .card-5 { transform: rotate(-1.2deg); }
 .card-6 { transform: rotate(0.8deg); }
+
+@media (max-width: 980px) {
+  .landing-copy {
+    left: 50%;
+    top: 1.5rem;
+    transform: translateX(-50%);
+    max-width: 92%;
+  }
+}
+
+@media (max-width: 760px) {
+  .landing {
+    padding: 1.2rem;
+  }
+
+  .landing-copy {
+    padding: 1.2rem 1.3rem;
+  }
+
+  .tin-can {
+    top: 33%;
+    left: 48%;
+    width: 92px;
+    height: 36px;
+  }
+
+  .knife {
+    top: 22%;
+    left: 22.5%;
+    width: 72px;
+    height: 48px;
+  }
+
+  .bottle {
+    top: 22%;
+    left: 68%;
+    width: 80px;
+    height: 52px;
+  }
+
+  .other-tin-cans {
+    top: 63%;
+    left: 57%;
+    width: 98px;
+    height: 72px;
+  }
+}
+
+@media (max-width: 520px) {
+  .landing-copy {
+    top: auto;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 2rem);
+    padding: 1rem 1.1rem;
+  }
+
+  .hotspot::before {
+    font-size: 0.68rem;
+    padding: 0.3rem 0.75rem;
+  }
+}
 
 @media (max-width: 900px) {
   .info-grid {
